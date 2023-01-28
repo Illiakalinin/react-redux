@@ -3,11 +3,14 @@ import React from 'react';
 import { CONTACT_VALIDATION_SCHEMA } from '../../../utils/Validate/validationSchemas';
 import Input from '../Input';
 import styles from './ContactForm.module.sass';
+import { connect } from 'react-redux';
+import { createContact } from '../../../store/slices/contactsSlice';
 
-function ContactForm () {
+function ContactForm ({ createNewContact }) {
   const initialValues = { name: '', phone: '', email: '', birthday: '' };
 
   const handleSubmit = (values, formikBag) => {
+    createNewContact(values);
     formikBag.resetForm();
   };
 
@@ -59,4 +62,8 @@ function ContactForm () {
   );
 }
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+  createNewContact: v => dispatch(createContact(v)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
