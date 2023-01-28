@@ -1,21 +1,12 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import { decrement, increment } from '../..';
+import { decrement, increment, setStep } from '../../store/slices/counterSlice';
 
 function Counter (props) {
-  const { count, dispatch } = props;
+  const { count, step, decrementCount, incrementCount, setNewStep } = props;
 
-  //* dispatch викликається, коли треба сповістити стору
-  //* про необхідність змінити стан.
-  //* Як саме треба змінити стан вказує екшн в параметрах dispatch:
-  //* "dispatch надсилає екшн с стору"
-  const decrementCount = () => {
-    dispatch(decrement());
-  };
-
-  const incrementCount = () => {
-    dispatch(increment());
+  const handleStepChange = ({ target: { value } }) => {
+    setNewStep(Number(value));
   };
 
   return (
@@ -23,17 +14,21 @@ function Counter (props) {
       <div>{count}</div>
       <button onClick={decrementCount}>-</button>
       <button onClick={incrementCount}>+</button>
+      <input type='number' value={step} onChange={handleStepChange} />
     </div>
   );
 }
 
-//* функція - перший параметр connect -
-//* для прокидування стейту в пропси компонента
 function mapStateToProps (state) {
   return state;
 }
 
-//* connect створює HOC, який прокине в пропси компонента, що обгортається,
-//* dispatch - функції для сповіщення стори про необхідність змінити стан
-const HOC = connect(mapStateToProps);
-export default HOC(Counter);
+function mapDispatchToProps (dispatch) {
+  return {
+    decrementCount: () => dispatch(decrement()),
+    incrementCount: () => dispatch(increment()),
+    setNewStep: v => dispatch(setStep(v)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
