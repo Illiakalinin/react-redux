@@ -1,9 +1,8 @@
 import './App.css';
-// import Counter from './components/Counter';
-import ThemeSwircher from './components/ThemeSwircher';
+import ContactPage from './pages/ContactPage';
 
 function App () {
-  return <ThemeSwircher />;
+  return <ContactPage />;
 }
 
 export default App;
