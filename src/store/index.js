@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './slices/counterSlice';
+import rootReducer from './rootReducer';
 
-const store = configureStore({ reducer });
+const store = configureStore({ reducer: rootReducer });
 
 export default store;
