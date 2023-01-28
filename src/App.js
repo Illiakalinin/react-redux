@@ -1,8 +1,9 @@
 import './App.css';
-import Counter from './components/Counter';
+// import Counter from './components/Counter';
+import ThemeSwircher from './components/ThemeSwircher';
 
 function App () {
-  return <Counter />;
+  return <ThemeSwircher />;
 }
 
 export default App;
