@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import './sandbox';
+// import './sandbox';
 
 //* Компонент Provider з обов'язковим пропом store
 //* прокидує вниз по дереву компонентів можливість для доступу до стану
