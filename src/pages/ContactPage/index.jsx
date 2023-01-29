@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactsList from '../../components/ContactsList';
 import ContactForm from '../../components/Forms/ContactForm';
 
 function ContactPage () {
@@ -6,7 +7,7 @@ function ContactPage () {
     <section>
       <h2>Contact Form</h2>
       <ContactForm />
-      {/* <ContactsList/> */}
+      <ContactsList />
     </section>
   );
 }
