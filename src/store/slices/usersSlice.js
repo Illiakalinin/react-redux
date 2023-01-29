@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { loadUsers } from '../../api';
 
 const USERS_SLICE_NAME = 'users';
 
@@ -7,12 +8,15 @@ const USERS_SLICE_NAME = 'users';
 export const getUsers = createAsyncThunk(
   `${USERS_SLICE_NAME}/getUsers`,
   async (currentPage, thunkAPI) => {
-    const { dispatch } = thunkAPI;
-    const data = await fetch(
-      `https://randomuser.me/api?seed=pe&page=${currentPage}&results=3`
-    ).then(response => response.json());
-    return data.results;
-    // dispatch(createUsers([data.results]));
+    try {
+      const { dispatch } = thunkAPI;
+      const data = await loadUsers(currentPage);
+      return data.results;
+      // dispatch(createUsers([data.results]));
+    } catch (e) {
+      const { rejectWithValue } = thunkAPI;
+      return rejectWithValue(e);
+    }
   }
 );
 
